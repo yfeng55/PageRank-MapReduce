@@ -23,8 +23,8 @@ public class PageRankReducer extends Reducer<Text, Text, Text, Text> {
 			String array_string = value_string.substring(1, value_string.length()-1);
 			String[] value_array = array_string.split(", ");
 			
-			System.out.print("MAPPER: ");
-			System.out.println(Arrays.toString(value_array));
+//			System.out.print("MAPPER: ");
+//			System.out.println(Arrays.toString(value_array));
 			
 			//get the PR Score from the array (last element)
 			try{
@@ -42,7 +42,7 @@ public class PageRankReducer extends Reducer<Text, Text, Text, Text> {
 			
 		}
 		
-		System.out.println("\n---------------");
+//		System.out.println("\n---------------");
 		context.write(key, new Text(label + " " + Float.toString(pr_total)));
 	  
 	
