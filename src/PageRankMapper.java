@@ -8,7 +8,7 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Mapper.Context;
 
-public class PageRankMapper extends Mapper<LongWritable, Text, Text, ArrayWritable> {
+public class PageRankMapper extends Mapper<LongWritable, Text, Text, Text> {
 	
 	
 	
@@ -35,7 +35,7 @@ public class PageRankMapper extends Mapper<LongWritable, Text, Text, ArrayWritab
 			
 			System.out.println("key=" + inputline[i] + ", value=" + outgoing + ", " + prVal);
 			
-			ArrayWritable pair = new ArrayWritable(new String[]{outgoing, prVal});
+			Text pair = new Text(Arrays.toString(new String[]{outgoing, prVal}));
 			
 			context.write(new Text(inputline[i]), pair);
 		}
@@ -56,7 +56,7 @@ public class PageRankMapper extends Mapper<LongWritable, Text, Text, ArrayWritab
 		System.out.println();
 		
 		
-		ArrayWritable outlinks_pair = new ArrayWritable(outlinks);
+		Text outlinks_pair = new Text(Arrays.toString(outlinks));
 		context.write(new Text(inputline[0]), outlinks_pair);
 		
 		
