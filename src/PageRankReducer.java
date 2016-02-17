@@ -14,6 +14,7 @@ public class PageRankReducer extends Reducer<Text, Text, Text, Text> {
 		
 		
 		float pr_total = 0;
+		String label="";
 		
 		for(Text value : values){
 
@@ -31,13 +32,18 @@ public class PageRankReducer extends Reducer<Text, Text, Text, Text> {
 				pr_total += pr_score;
 			}catch(Exception e){
 				
+				label += (" " + value_array[0]);
+				for(int i=1; i<value_array.length; i++){
+					label += (" " + value_array[i]);
+				}
+				
 			}
 			
 			
 		}
 		
 		System.out.println("\n---------------");
-		context.write(key, new Text(Float.toString(pr_total)));
+		context.write(key, new Text(label + " " + Float.toString(pr_total)));
 	  
 	
 	}
